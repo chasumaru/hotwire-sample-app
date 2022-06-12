@@ -1,0 +1,2 @@
+class Deer < ApplicationRecord
+end
