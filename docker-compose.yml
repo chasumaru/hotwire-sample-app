@@ -30,7 +30,7 @@ services:
       - public-data:/neko/public
       - tmp-data:/neko/tmp
     ports:
-      - 3001:80
+      - 3100:80
     depends_on:
       - app
 volumes:
