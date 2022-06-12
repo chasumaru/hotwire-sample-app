@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @pig %>
+
+<div>
+  <%= link_to "Edit this pig", edit_pig_path(@pig) %> |
+  <%= link_to "Back to pigs", pigs_path %>
+
+  <%= button_to "Destroy this pig", @pig, method: :delete %>
+</div>

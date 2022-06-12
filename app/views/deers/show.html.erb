@@ -1,10 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<div id="<%= dom_id @deer %>">
+  <p>
+    <strong>名前:</strong>
+    <%= @deer.name %>
+  </p>
 
-<%= render @deer %>
+  <p>
+    <strong>年齢:</strong>
+    <%= @deer.age %>
+  </p>
+</div>
 
 <div>
-  <%= link_to "Edit this deer", edit_deer_path(@deer) %> |
-  <%= link_to "Back to deers", deers_path %>
-
-  <%= button_to "Destroy this deer", @deer, method: :delete %>
+  <%= link_to "編集", edit_deer_path(@deer) %> |
+  <%= link_to "戻る", deers_path %>
+  <%= button_to "削除", @deer, method: :delete %>
 </div>

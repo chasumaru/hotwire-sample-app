@@ -74,3 +74,8 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "kaminari", "~> 1.2"
+
+gem "ransack"
+gem "bootstrap_form", "~> 5.0"

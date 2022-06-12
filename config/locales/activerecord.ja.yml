@@ -1,0 +1,36 @@
+ja:
+  activerecord:
+    models:
+      deer: シカ
+    attributes:
+      deer:
+        name: 名前
+        age: 年齢
+  
+    models:
+      pig: イノシシ
+    attributes:
+      pig:
+        name: 名前
+        age: 年齢
+
+    models:
+      bear:  クマ
+    attributes:
+      bear:
+        name: 名前
+        age: 年齢
+
+    models:
+      bear:  クマ
+    attributes:
+      bear:
+        name: 名前
+        age: 年齢
+  
+    # models:
+    #   bird:  鳥類
+    # attributes:
+    #   bird:
+    #     name: 名前
+    #     age: 年齢

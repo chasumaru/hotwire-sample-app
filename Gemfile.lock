@@ -71,6 +71,9 @@ GEM
     bindex (0.8.1)
     bootsnap (1.12.0)
       msgpack (~> 1.2)
+    bootstrap_form (5.0.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     builder (3.2.4)
     capybara (3.37.1)
       addressable
@@ -101,6 +104,18 @@ GEM
       reline (>= 0.3.0)
     jsbundling-rails (1.0.2)
       railties (>= 6.0.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -164,6 +179,10 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    ransack (3.2.1)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     redis (4.6.0)
     regexp_parser (2.5.0)
     reline (0.3.1)
@@ -224,13 +243,16 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  bootstrap_form (~> 5.0)
   capybara
   cssbundling-rails
   debug
   jsbundling-rails
+  kaminari (~> 1.2)
   mysql2 (~> 0.5)
   puma (~> 5.0)
   rails (~> 7.0.3)
+  ransack
   redis (~> 4.0)
   sassc-rails
   selenium-webdriver

@@ -10,8 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_12_164402) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_12_190339) do
+  create_table "bears", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "birds", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "deers", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pigs", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.integer "age"
     t.datetime "created_at", null: false

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @bear %>
+
+<div>
+  <%= link_to "Edit this bear", edit_bear_path(@bear) %> |
+  <%= link_to "Back to bears", bears_path %>
+
+  <%= button_to "Destroy this bear", @bear, method: :delete %>
+</div>
