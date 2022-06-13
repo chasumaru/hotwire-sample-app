@@ -1,10 +1,4 @@
-<h1>シカを編集する</h1>
-
-<%= render "form", deer: @deer %>
-
-<br>
-
-<div>
-  <%= link_to "詳細", @deer %> |
-  <%= link_to "戻る", deers_path %>
-</div>
+app/views/deers/edit.html.erb
+<%= render "modal", title: "編集" do %>
+  <%= render "form", deer: @deer %>
+<% end %>

@@ -33,14 +33,12 @@ class DeersController < ApplicationController
   def create
     @deer = Deer.new(deer_params)
 
-    respond_to do |format|
       if @deer.save
         #  redirect_to @deer
          flash.now.notice = "シカを登録しました。" 
       else
          render :new, status: :unprocessable_entity 
       end
-    end
   end
 
   # PATCH/PUT /deers/1 or /deers/1.json

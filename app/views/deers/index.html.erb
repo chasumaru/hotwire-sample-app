@@ -11,7 +11,15 @@
   </div>
 
   <div class="card-body">
-    <%= search_form_for @search, html: {data: { turbo_frame: "deers-list" }} do |f| %>
+    <%= search_form_for(
+      @search,
+      html: {
+        data: {
+          turbo_frame: "deers-list",
+          controller: "form",
+          action: "input->form#submit"
+        }
+      }) do |f| %>
       <div class="row g3 mb-3">
         <div class="col-4 col-xl-2">
           <%= f.label :name_cont, "名前", class: "form-label" %>
@@ -22,7 +30,6 @@
           <%= f.search_field :age_eq, class: "form-control" %>
         </div>
         <div class="col-4 d-flex align-items-end">
-          <%= button_tag(icon_with_text("search", "検索"), class: "btn btn-primary me-1") %>
           <%= link_to "リセット", deers_path, class: "btn btn-outline-secondary" %>
         </div>
       </div>
@@ -37,7 +44,7 @@
 
 
   <div class="card-body mx-3">
-    <%= turbo_frame_tag "deers-list" do %>
+    <%= turbo_frame_tag "deers-list", data: { turbo_action: :advance } do %>
       <div class="row py-2">
         <div class="col-4 mt-auto">
           <%= sort_link(@search, :name) %>
@@ -47,20 +54,23 @@
         </div>
         <div class="col-4 d-flex justify-content-end">
           <%= link_to icon_with_text("plus-circle", "登録"),
-                    new_deer_path,
-                    class: "btn btn-outline-primary", data: { turbo_frame: "new_deer" }
-        %>
+                      new_deer_path,
+                      class: "btn btn-outline-primary",
+                      data: { turbo_frame: "modal" }
+          %>
         </div>
       </div>
-      <%# 登録リンククリック時に、deers#newの新規登録フォーム部分をここに置換する %>
-      <%= turbo_frame_tag "new_deer" %>
-      <%= render @deers %>
+      
       <div id="deers">
-        <%= render @deers %>
-      </div>
-      <div class="d-flex justify-content-end mt-3">
-        <%= paginate @deers %>
-      </div>
+       <%# 今のページの`<turbo-frame>` %>
+       <%= turbo_frame_tag "deers-page-#{@deers.current_page}" do %>
+         <%# 今のページで取得したdeer一覧 %>
+         <%= render @deers %>
+
+         <%# 遅延読み込みで次ページを取得する`<turbo-frame>` %>
+         <%= turbo_frame_tag "deers-page-#{@deers.next_page}", loading: :lazy, src: path_to_next_page(@deers) %>
+       <% end %>
+     </div>
     <% end %>
   </div>
 </div>
