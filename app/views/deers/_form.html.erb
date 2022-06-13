@@ -1,0 +1,8 @@
+
+<%= turbo_frame_tag deer do %>
+  <%= bootstrap_form_with(model: deer, data: { action: "turbo:submit-end->modal#close" }) do |form| %>
+    <%= form.text_field :name %>
+    <%= form.text_field :age %>
+    <%= form.primary %>
+  <% end%>
+<% end %>

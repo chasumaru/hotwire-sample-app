@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Neko</title>
+    <title>SampleApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%# Turboのキャッシュの無効化。予期せぬJSエラーを防ぐ %>
+    <meta name="turbo-cache-control" content="no-cache">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,7 +12,27 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
-    <%= yield %>
+    <body>
+    <div class="vh-100">
+      <div class="container-fluid">
+        <div class="row">
+
+          <div class="ps-0" style="width: 200px;"></div>
+          <div class="ps-0 position-fixed" style="width: 200px;">
+            <%= render "sidebar" %>
+          </div>
+
+          <div class="col my-4">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <%# 編集・登録リンクのTurbo Framesのターゲット %>
+    <%# 編集・登録リンクをクリックすると、ここにサーバーから取得したモーダルが置換される %>
+    <%# モーダルの置き場所はどこでもいいので、とりあえず<body>の一番下に置いておく %>
+    <%= turbo_frame_tag "modal" %>
+    <div id="flashes" class="position-fixed top-0 end-0" style="margin: 0.75rem"></div>
   </body>
 </html>

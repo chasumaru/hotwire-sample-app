@@ -1,0 +1,17 @@
+<%= turbo_frame_tag deer do %>
+  <div class="row py-2 border-top">
+    <div class="col-4 my-auto">
+      <%= deer.name %>
+    </div>
+    <div class="col-4 my-auto">
+      <%= deer.age %>
+    </div>
+    <div class="col-4">
+      <div class="d-flex justify-content-end">
+      <%# modalを対象とする %>
+        <%= link_to "編集", edit_deer_path(deer), class: "btn btn-sm btn-outline-primary me-2", data: { turbo_frame: "modal" } %>
+        <%= link_to "削除", deer, class: "btn btn-sm btn-outline-danger", data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+      </div>
+    </div>
+  </div>
+<% end %>

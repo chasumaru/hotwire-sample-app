@@ -1,0 +1,5 @@
+<%# `#deers`の先頭に登録されたdeerを追加する %>
+<%= turbo_stream.prepend "deers", @deer %>
+
+<%# Flashを表示 %>
+<%= turbo_stream_flash %>
