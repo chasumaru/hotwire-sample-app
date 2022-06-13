@@ -35,36 +35,43 @@ class DeersController < ApplicationController
 
     respond_to do |format|
       if @deer.save
-        format.html { redirect_to deer_url(@deer), notice: "シカを登録しました。" }
-        format.json { render :show, status: :created, location: @deer }
+        #  redirect_to @deer
+         flash.now.notice = "シカを登録しました。" 
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @deer.errors, status: :unprocessable_entity }
+         render :new, status: :unprocessable_entity 
       end
     end
   end
 
   # PATCH/PUT /deers/1 or /deers/1.json
   def update
-    respond_to do |format|
-      if @deer.update(deer_params)
-        format.html { redirect_to deer_url(@deer), notice: "シカが更新されました。" }
-        format.json { render :show, status: :ok, location: @deer }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @deer.errors, status: :unprocessable_entity }
-      end
+    if @deer.update(deer_params)
+      # /cats/:id（つまりcats/show）にリダイレクトする -> cats/showでshow.html.erbのレンダリング結果をレスポンスする。
+      # redirect_to @deer, notice: "シカが更新されました。" 
+      # リダイレクトを削除（リダイレクトがないと暗黙的に`render`が実行される）
+      flash.now.notice = "シカを更新しました。"
+
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
+    # respond_to do |format|
+    #   if @deer.update(deer_params)
+    #     format.html { redirect_to deer_url(@deer), notice: "シカが更新されました。" }
+    #     format.json { render :show, status: :ok, location: @deer }
+    #   else
+    #     format.html { render :edit, status: :unprocessable_entity }
+    #     format.json { render json: @deer.errors, status: :unprocessable_entity }
+    #   end
+    # end
+  
 
   # DELETE /deers/1 or /deers/1.json
   def destroy
     @deer.destroy
+    # redirect_to deers_url, notice: "シカを削除しました。
+    flash.now.notice = "シカを削除しました。"
 
-    respond_to do |format|
-      format.html { redirect_to deers_url, notice: "シカを削除しました。" }
-      format.json { head :no_content }
-    end
   end
 
   private

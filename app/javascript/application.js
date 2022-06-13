@@ -2,4 +2,4 @@
 import "./controllers"
 import "@hotwired/turbo-rails"
 
-Turbo.session.drive = false
+// Turbo.session.drive = false

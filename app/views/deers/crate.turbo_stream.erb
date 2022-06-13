@@ -1,0 +1,8 @@
+<%# `#deers`の先頭に登録されたdeerを追加する %>
+<%= turbo_stream.prepend "deers", @deer %>
+
+<%# 登録の入力フォームの中身を空にする %>
+<%= turbo_stream.update Deer.new, "" %>
+
+<%# Flashを表示 %>
+<%= turbo_stream_flash %>
