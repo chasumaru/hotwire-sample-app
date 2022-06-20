@@ -1,6 +1,13 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @pig %>
+<div id="<%= dom_id @cat %>">
+  <p>
+    <strong>名前:</strong>
+    <%= @cat.name %>
+  </p>
+  <p>
+    <strong>年齢:</strong>
+    <%= @cat.age %>
+  </p>
+</div>
 
 <div>
   <%= link_to "Edit this pig", edit_pig_path(@pig) %> |

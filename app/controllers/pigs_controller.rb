@@ -3,7 +3,16 @@ class PigsController < ApplicationController
 
   # GET /pigs
   def index
-    @pigs = Pig.all
+    # `pig.ransack`でpigに対してransackを使う
+    # params[:q]には検索フォームで指定した検索条件が入る
+    @search = Pig.ransack(params[:q])
+
+    # デフォルトのソートをid降順にする
+    @search.sorts = 'id desc' if @search.sorts.empty?
+
+    # `@search.result`で検索結果となる@pigsを取得する
+    # 検索結果に対してはkaminariのpageメソッドをチェーンできる
+    @pigs = @search.result.page(params[:page])
   end
 
   # GET /pigs/1
@@ -24,7 +33,7 @@ class PigsController < ApplicationController
     @pig = Pig.new(pig_params)
 
     if @pig.save
-      redirect_to @pig, notice: "Pig was successfully created."
+      redirect_to @cat, notice: "いのししを登録しました。"
     else
       render :new, status: :unprocessable_entity
     end
@@ -42,7 +51,7 @@ class PigsController < ApplicationController
   # DELETE /pigs/1
   def destroy
     @pig.destroy
-    redirect_to pigs_url, notice: "Pig was successfully destroyed."
+    redirect_to pigs_url, notice: "いのししを削除しました。"
   end
 
   private
