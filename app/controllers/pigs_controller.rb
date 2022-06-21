@@ -33,7 +33,7 @@ class PigsController < ApplicationController
     @pig = Pig.new(pig_params)
 
     if @pig.save
-      redirect_to @cat, notice: "いのししを登録しました。"
+      flash.now.notice = "いのししを登録しました。"
     else
       render :new, status: :unprocessable_entity
     end
@@ -42,7 +42,8 @@ class PigsController < ApplicationController
   # PATCH/PUT /pigs/1
   def update
     if @pig.update(pig_params)
-      redirect_to @pig, notice: "Pig was successfully updated."
+      flash.now.notice = "いのししを更新しました。"
+
     else
       render :edit, status: :unprocessable_entity
     end
@@ -51,7 +52,7 @@ class PigsController < ApplicationController
   # DELETE /pigs/1
   def destroy
     @pig.destroy
-    redirect_to pigs_url, notice: "いのししを削除しました。"
+    flash.now.notice = "いのししを削除しました。"
   end
 
   private

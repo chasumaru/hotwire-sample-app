@@ -1,14 +1,17 @@
-<div class="row py-2 border-top">
-  <div class="col-4 my-auto">
-    <%= pig.name %>
-  </div>
-  <div class="col-4 my-auto">
-    <%= pig.age %>
-  </div>
-  <div class="col-4">
-    <div class="d-flex justify-content-end">
-      <%= link_to "編集", edit_pig_path(pig), class: "btn btn-sm btn-outline-primary me-2" %>
-      <%= button_to "削除", pig, method: :delete, class: "btn btn-sm btn-outline-danger" %>
+<%# 全体を`turbo_frame_tag`で囲う %>
+<%= turbo_frame_tag pig do %>
+  <div class="row py-2 border-top">
+    <div class="col-4 my-auto">
+      <%= pig.name %>
+    </div>
+    <div class="col-4 my-auto">
+      <%= pig.age %>
+    </div>
+    <div class="col-4">
+      <div class="d-flex justify-content-end">
+        <%= link_to "編集", edit_pig_path(pig), class: "btn btn-sm btn-outline-primary me-2" %>
+        <%= button_to "削除", pig, method: :delete, class: "btn btn-sm btn-outline-danger", form: { data: { turbo_confirm: "本当に削除しますか？" } } %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
