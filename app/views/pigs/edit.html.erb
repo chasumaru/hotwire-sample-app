@@ -1,10 +1,5 @@
 <h1>Editing pig</h1>
+<%= render "modal", title: "編集" do %>
+  <%= render "form", pig: @pig %>
+<% end %>
 
-<%= render "form", pig: @pig %>
-
-<br>
-
-<div>
-  <%= link_to "Show this pig", @pig %> |
-  <%= link_to "Back to pigs", pigs_path %>
-</div>

@@ -1,9 +1,4 @@
-<h1>New pig</h1>
+<%= render "modal", title: "登録" do %>
+  <%= render "form", pig: @pig %>
+<% end %>
 
-<%= render "form", pig: @pig %>
-
-<br>
-
-<div>
-  <%= link_to "Back to pigs", pigs_path %>
-</div>

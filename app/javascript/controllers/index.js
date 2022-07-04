@@ -4,19 +4,16 @@
 
 import { application } from "./application"
 
-<<<<<<< HEAD
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
-=======
+
 import FormController from "./form_controller.js"
 application.register("form", FormController)
 
-import HelloController from "./hello_controller.js"
-application.register("hello", HelloController)
 
 import ModalController from "./modal_controller.js"
 application.register("modal", ModalController)
 
 import ToastController from "./toast_controller.js"
 application.register("toast", ToastController)
->>>>>>> develop
+
