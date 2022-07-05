@@ -1,10 +1,3 @@
-<h1>Editing bear</h1>
-
-<%= render "form", bear: @bear %>
-
-<br>
-
-<div>
-  <%= link_to "Show this bear", @bear %> |
-  <%= link_to "Back to bears", bears_path %>
-</div>
+<%= render "modal", title: "編集" do %>
+  <%= render "form", bear: @bear %>
+<% end %>

@@ -1,10 +1,3 @@
-<h1>Editing bird</h1>
-
-<%= render "form", bird: @bird %>
-
-<br>
-
-<div>
-  <%= link_to "Show this bird", @bird %> |
-  <%= link_to "Back to birds", birds_path %>
-</div>
+<%= render "modal", title: "編集" do %>
+  <%= render "form", bird: @bird %>
+<% end %>

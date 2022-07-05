@@ -3,7 +3,16 @@ class BirdsController < ApplicationController
 
   # GET /birds
   def index
-    @birds = Bird.all
+   # `Bird.ransack`でBirdに対してransackを使う
+   # params[:q]には検索フォームで指定した検索条件が入る
+   @search = Bird.ransack(params[:q])
+
+   # デフォルトのソートをid降順にする
+   @search.sorts = 'id desc' if @search.sorts.empty?
+
+   # `@search.result`で検索結果となる@birdsを取得する
+   # 検索結果に対してはkaminariのpageメソッドをチェーンできる
+   @birds = @search.result.page(params[:page])
   end
 
   # GET /birds/1
@@ -24,7 +33,7 @@ class BirdsController < ApplicationController
     @bird = Bird.new(bird_params)
 
     if @bird.save
-      redirect_to @bird, notice: "Bird was successfully created."
+      flash.now.notice = "トリを登録しました。"
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +42,7 @@ class BirdsController < ApplicationController
   # PATCH/PUT /birds/1
   def update
     if @bird.update(bird_params)
-      redirect_to @bird, notice: "Bird was successfully updated."
+      flash.now.notice = "トリを更新しました。"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -42,7 +51,7 @@ class BirdsController < ApplicationController
   # DELETE /birds/1
   def destroy
     @bird.destroy
-    redirect_to birds_url, notice: "Bird was successfully destroyed."
+    flash.now.notice = "トリを削除しました。"
   end
 
   private

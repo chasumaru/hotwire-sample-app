@@ -1,14 +1,70 @@
-<p style="color: green"><%= notice %></p>
+<!-- 見出し -->
+<h4 class="fw-bold">
+  <span class="me-1">🦆</span>
+  <span>トリ</span>
+</h4>
 
-<h1>Birds</h1>
+<!-- 検索フォーム -->
+<div class="card shadow mt-3">
+  <div class="card-header">
+    <%= icon_with_text("search", "検索条件") %>
+  </div>
 
-<div id="birds">
-  <% @birds.each do |bird| %>
-    <%= render bird %>
-    <p>
-      <%= link_to "Show this bird", bird %>
-    </p>
-  <% end %>
+  <div class="card-body">
+    <%= search_form_for(
+    @search,
+    html:{ 
+      data: { 
+        turbo_frame: "birds-list",
+        controller: "form",
+        action: "input->form#submit" }
+    }) do |f| %>
+      <div class="row g3 mb-3">
+        <div class="col-4 col-xl-2">
+          <%= f.label :name_cont, "名前", class: "form-label" %>
+          <%= f.search_field :name_cont, class: "form-control" %>
+        </div>
+        <div class="col-4 col-xl-2">
+          <%= f.label :age_eq, "年齢", class: "form-label" %>
+          <%= f.search_field :age_eq, class: "form-control" %>
+        </div>
+        <div class="col-4 d-flex align-items-end">
+          <%= link_to "リセット", birds_path, class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
 
-<%= link_to "New bird", new_bird_path %>
+<!-- 一覧 -->
+<div class="card shadow mt-3">
+  <div class="card-header">
+    <%= icon_with_text("table", "一覧") %>
+  </div>
+    <div class="card-body mx-3">
+  <%= turbo_frame_tag "birds-list", data: { turbo_action: :advance } do %>
+      <div class="row py-2">
+        <div class="col-4 mt-auto">
+          <%= sort_link(@search, :name) %>
+        </div>
+        <div class="col-4 mt-auto">
+          <%= sort_link(@search, :age) %>
+        </div>
+        <div class="col-4 d-flex justify-content-end">
+          <%= link_to icon_with_text("plus-circle", "登録"),
+                      new_bird_path,
+                      class: "btn btn-outline-primary",
+                      data: {turbo_frame: "modal" }
+          %>
+        </div>
+      </div>
+      <div id="birds">
+        <%= render @birds %>
+      </div>
+
+      <div class="d-flex justify-content-end mt-3">
+        <%= paginate @birds %>
+      </div>
+    <% end %>
+  </div>
+</div>

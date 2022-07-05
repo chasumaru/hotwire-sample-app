@@ -3,7 +3,16 @@ class BearsController < ApplicationController
 
   # GET /bears
   def index
-    @bears = Bear.all
+   # `Bear.ransack`でBearに対してransackを使う
+   # params[:q]には検索フォームで指定した検索条件が入る
+   @search = Bear.ransack(params[:q])
+
+   # デフォルトのソートをid降順にする
+   @search.sorts = 'id desc' if @search.sorts.empty?
+
+   # `@search.result`で検索結果となる@bearsを取得する
+   # 検索結果に対してはkaminariのpageメソッドをチェーンできる
+   @bears = @search.result.page(params[:page])
   end
 
   # GET /bears/1
@@ -24,7 +33,7 @@ class BearsController < ApplicationController
     @bear = Bear.new(bear_params)
 
     if @bear.save
-      redirect_to @bear, notice: "Bear was successfully created."
+      flash.now.notice = "クマを登録しました。"
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +42,7 @@ class BearsController < ApplicationController
   # PATCH/PUT /bears/1
   def update
     if @bear.update(bear_params)
-      redirect_to @bear, notice: "Bear was successfully updated."
+      flash.now.notice = "クマを更新しました。"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -42,7 +51,7 @@ class BearsController < ApplicationController
   # DELETE /bears/1
   def destroy
     @bear.destroy
-    redirect_to bears_url, notice: "Bear was successfully destroyed."
+    flash.now.notice = "クマを削除しました。"
   end
 
   private

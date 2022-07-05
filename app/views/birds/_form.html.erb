@@ -1,27 +1,9 @@
-<%= form_with(model: bird) do |form| %>
-  <% if bird.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(bird.errors.count, "error") %> prohibited this bird from being saved:</h2>
-
-      <ul>
-        <% bird.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
+<%= turbo_frame_tag bird do %>
+  <%# レイアウトをモーダル用に整える %>
+  <%# turbo:submit-end（Turboのsubmit後）イベント発火時に、modal#close（モーダルを閉じる）を実行する %>
+  <%= bootstrap_form_with(model: bird, data: { action: "turbo:submit-end->modal#close" }) do |form| %>
     <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :age, style: "display: block" %>
-    <%= form.number_field :age %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+    <%= form.text_field :age %>
+    <%= form.primary %>
+  <% end%>
 <% end %>
